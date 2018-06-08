@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let tableArea = document.getElementById('mult-table')
   buttonArea.addEventListener('click', handleButtonClick)
   attachButtons()
+  generateRows(1)
 
 
   function attachButtons () {
