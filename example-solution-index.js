@@ -1,34 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let buttonArea = document.getElementById('buttons')
+
+  let buttonsArea = document.getElementById('buttons')
   let tableArea = document.getElementById('mult-table')
-  buttonArea.addEventListener('click', handleButtonClick)
-  attachButtons()
+  generateButtons()
   generateRows(1)
 
-
-  function attachButtons () {
-    for (let i = 1; i < 10; i++) {
-      let button = document.createElement('button')
-      button.innerText = `${i}`
-      button.className = 'multiplier'
-      buttonArea.append(button)
-    }
-  }
-
-  function handleButtonClick (event) {
-    if (event.target.className === 'multiplier'){
+  buttonsArea.addEventListener('click', (e)=> {
+    if (e.target.className === 'multiplier') {
       tableArea.innerHTML = ''
-      let number = parseInt(event.target.innerText)
-      generateRows(number)
+      let num = parseInt(e.target.dataset.multiplier)
+      generateRows(num)
+    }
+  })
+
+  function generateButtons () {
+    for (let i = 1; i <= 10; i++) {
+      let newButton = document.createElement('button')
+      newButton.className = 'multiplier'
+      newButton.innerText = `Multiply by ${i}`
+      newButton.dataset.multiplier = i
+      // newButton.setAttribute('data-multiplier', i)
+      buttonsArea.append(newButton)
     }
   }
 
-  function generateRows(num) {
-    for (let i = 1; i <= 10; i++) {
+  function generateRows(multiplier) {
+    for (let i = 0; i < 10; i++) {
       let newRow = `<tr>
-        <td>
-          ${num} x ${i} = ${num*i}
-        </td>
+        <td> ${multiplier} x ${i} = ${multiplier*i} </td>
       </tr>`
       tableArea.innerHTML += newRow
     }
